@@ -1,52 +1,52 @@
 # 🛡️ Insurance Fraud Detection API
 
-API ini dirancang untuk mendeteksi kemungkinan klaim asuransi palsu menggunakan machine learning. Model ini telah dilatih dengan dataset insurance fraud dan mendukung prediksi berdasarkan fitur top-10 yang paling berpengaruh.
+This API is designed to detect potential fraudulent insurance claims using machine learning. The model has been trained with an insurance fraud dataset and supports prediction based on the top 10 most influential features.
 
 ---
 
 ## 🚀 Features
-- Predict apakah klaim tergolong fraud
-- Menyediakan probabilitas fraud
-- Skor risiko: Low / Medium / High
-- Menggunakan model XGBoost (Top 10 features)
-- Support API Key untuk autentikasi
+- Predict whether a claim is fraudulent
+- Returns fraud probability
+- Risk level: Low / Medium / High
+- Powered by XGBoost model (Top 10 features)
+- API Key authentication supported
 
 ---
 
-## 📦 Endpoint
+## 📦 Endpoints
 
 ### `POST /v1/predict`
-- **Deskripsi**: Memprediksi kemungkinan fraud berdasarkan data input.
+- **Description**: Predicts the likelihood of insurance fraud based on input data.
 - **Headers**:
-  - `x-api-key`: API key Anda
+  - `x-api-key`: Your API key
 - **Body (JSON)**:
 ```json
 {
   "data": {
-    "Month": "Jan",
-    "AccidentArea": "Urban",
-    "Sex": "Male",
-    "Fault": "Policy Holder",
-    "VehicleCategory": "Sedan",
-    "VehiclePrice": "20000",
-    "Days:Policy-Claim": 15,
-    "AgeOfVehicle": "2",
-    "PoliceReportFiled": "Yes",
-    "WitnessPresent": "No"
+    "AccidentArea": 1,
+    "AddressChange-Claim": 0,
+    "BasePolicy": 1,
+    "Deductible": 400,
+    "Fault": 1,
+    "Month": 11,
+    "MonthClaimed": 12,
+    "NumberOfCars": 0,
+    "PolicyType": 2,
+    "Year": 1995
   }
 }
 ```
 - **Response**:
 ```json
 {
-  "prediction": "is fraud",
-  "fraud_probability": 0.82,
-  "risk_level": "high"
+  "is_fraud": false,
+  "fraud_probability": 0.0035,
+  "risk_level": "low"
 }
 ```
 
 ### `GET /v1/health`
-- Mengecek status API
+- Check the health status of the API
 
 ---
 
@@ -63,12 +63,12 @@ docker run -d -p 8888:8888 apinaz-fraud-insurance
 ---
 
 ## 🔐 API Key
-Untuk menggunakan endpoint, Anda perlu menambahkan header:
+To use the endpoint, include the header:
 ```bash
 x-api-key: your_api_key_here
 ```
 
-API Key default dapat Anda ubah di file `main.py`.
+You can change the default API Key inside `main.py`.
 
 ---
 
@@ -88,7 +88,7 @@ API Key default dapat Anda ubah di file `main.py`.
 ---
 
 ## ✨ Status
-📦 **Stable MVP** – Siap digunakan untuk demo atau integrasi internal. Cocok untuk portofolio dan showcase profesional.
+📦 **Stable MVP** – Ready for demo and internal integration. Ideal for portfolio and professional showcase.
 
 > Powered by OpenAI's GPT + Mentor feedback.
 
