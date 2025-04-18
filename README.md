@@ -1,25 +1,94 @@
-# 🛡️ API - Insurance Fraud Detection (FastAPI)
+# 🛡️ Insurance Fraud Detection API
 
-This project provides a FastAPI-based Machine Learning API to detect insurance fraud and return a risk level: **Low**, **Mid**, or **High**.
+API ini dirancang untuk mendeteksi kemungkinan klaim asuransi palsu menggunakan machine learning. Model ini telah dilatih dengan dataset insurance fraud dan mendukung prediksi berdasarkan fitur top-10 yang paling berpengaruh.
 
-## 📦 Features
+---
 
-- Real-time fraud detection
-- Outputs fraud risk levels
-- Simple JSON input/output
-- Dockerized for easy deployment
+## 🚀 Features
+- Predict apakah klaim tergolong fraud
+- Menyediakan probabilitas fraud
+- Skor risiko: Low / Medium / High
+- Menggunakan model XGBoost (Top 10 features)
+- Support API Key untuk autentikasi
 
-## 🚀 Getting Started
+---
 
-### Prerequisites
+## 📦 Endpoint
 
-- Python 3.10+
-- Docker (for containerized deployment)
+### `POST /v1/predict`
+- **Deskripsi**: Memprediksi kemungkinan fraud berdasarkan data input.
+- **Headers**:
+  - `x-api-key`: API key Anda
+- **Body (JSON)**:
+```json
+{
+  "data": {
+    "Month": "Jan",
+    "AccidentArea": "Urban",
+    "Sex": "Male",
+    "Fault": "Policy Holder",
+    "VehicleCategory": "Sedan",
+    "VehiclePrice": "20000",
+    "Days:Policy-Claim": 15,
+    "AgeOfVehicle": "2",
+    "PoliceReportFiled": "Yes",
+    "WitnessPresent": "No"
+  }
+}
+```
+- **Response**:
+```json
+{
+  "prediction": "is fraud",
+  "fraud_probability": 0.82,
+  "risk_level": "high"
+}
+```
 
-### Installation
+### `GET /v1/health`
+- Mengecek status API
 
+---
+
+## 🐳 Docker Support
+### Build
 ```bash
-git clone https://github.com/username/apinaz-fraud-insurance.git
-cd apinaz-fraud-insurance
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8888
+docker build -t apinaz-fraud-insurance .
+```
+### Run
+```bash
+docker run -d -p 8888:8888 apinaz-fraud-insurance
+```
+
+---
+
+## 🔐 API Key
+Untuk menggunakan endpoint, Anda perlu menambahkan header:
+```bash
+x-api-key: your_api_key_here
+```
+
+API Key default dapat Anda ubah di file `main.py`.
+
+---
+
+## 📚 Tech Stack
+- FastAPI
+- XGBoost
+- Joblib
+- Docker
+- Pydantic
+
+---
+
+## 🧠 Author
+- **Nazriellesmono**
+- GitHub: [@Nazriellesmono](https://github.com/Nazriellesmono)
+
+---
+
+## ✨ Status
+📦 **Stable MVP** – Siap digunakan untuk demo atau integrasi internal. Cocok untuk portofolio dan showcase profesional.
+
+> Powered by OpenAI's GPT + Mentor feedback.
+
