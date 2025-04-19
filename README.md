@@ -72,6 +72,20 @@ You can change the default API Key inside `main.py`.
 
 ---
 
+## 🧪 API Documentation (Swagger)
+
+Once the Docker container is running, you can access the interactive API documentation via Swagger UI:
+
+👉 [http://localhost:8888/docs](http://localhost:8888/docs)
+
+This documentation includes:
+- Input schema (JSON)
+- Example payloads
+- Output probability of fraud detection
+- Real-time ROC/AUC evaluation
+
+---
+
 ## 📚 Tech Stack
 - FastAPI
 - XGBoost
